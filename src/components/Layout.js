@@ -2,11 +2,11 @@ import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 
 const useStyle = makeStyles({
-    page:{
+    page: {
         backgroundColor: "#f9f9f9"
     }
 })
-function Layout({children}) {
+function Layout({ children }) {
     const classes = useStyle();
 
     return (
