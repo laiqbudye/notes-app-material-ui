@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -21,28 +22,41 @@ const useStyle = makeStyles({
 
 function Create() {
     const classes = useStyle();
+    const history = useHistory();
 
-    const [note, setNote] = useState('');
+    const [title, setTitle] = useState('');
     const [detail, setDetail] = useState('');
     const [category, setCategory] = useState('todos');
-    const [noteError, setNoteError] = useState(false);
+    const [titleError, setTitleError] = useState(false);
     const [detailError, setDetailError] = useState(false);
 
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        setNoteError(false);
+        setTitleError(false);
         setDetailError(false);
 
-        if(!note){
-            setNoteError(true)
+        if(!title){
+            setTitleError(true)
         }
 
         if(!detail){
             setDetailError(true)
         }
 
-        console.log(note, detail, category)
+        if(title && detail){
+            async function submitData(){
+                await fetch('http://localhost:8000/notes', {
+                    method:'POST',
+                    headers:{
+                        "Content-type": "application/json"
+                    },
+                    body: JSON.stringify({title, detail, category})
+                })
+                history.push('/');
+            }
+            submitData();
+        }
     }
 
     return (
@@ -64,9 +78,9 @@ function Create() {
                     color='secondary'
                     fullWidth
                     required     // here it does not checks for validate, it just adds only asterik in front of label
-                    value={note}
-                    onChange={(e) => setNote(e.target.value)}
-                    error={noteError}
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    error={titleError}
                 >
                 </TextField>
 
