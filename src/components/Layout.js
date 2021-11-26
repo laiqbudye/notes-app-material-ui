@@ -11,6 +11,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import AppBar from '@material-ui/core/AppBar';
 import ToolBar from '@material-ui/core/ToolBar';
+import DescriptionIcon from '@material-ui/icons/Description';
 
 const drawerWidth = 250;
 
@@ -69,7 +70,7 @@ function Layout({ children }) {
 
     return (
         <div className={classes.root}>
-            <AppBar className={classes.appbar}
+            <AppBar color='secondary' className={classes.appbar}
                 elevation={0}
             >
                 <ToolBar>
@@ -91,7 +92,7 @@ function Layout({ children }) {
             >
                 <div>
                     <Typography variant='h5' className={classes.title}>
-                        Notes
+                         <DescriptionIcon /> Web Diary
                     </Typography>
                 </div>
 
