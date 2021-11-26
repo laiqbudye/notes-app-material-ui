@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -11,6 +11,8 @@ import FormLabel from '@material-ui/core/FormLabel';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { makeStyles } from '@material-ui/core';
+import { submitNote } from '../actions/create';
+import { connect } from 'react-redux';
 
 const useStyle = makeStyles({
     field: {
@@ -20,7 +22,7 @@ const useStyle = makeStyles({
     }
 })
 
-function Create() {
+function Create({ notes, saveSucess, submitNote }) {
     const classes = useStyle();
     const history = useHistory();
 
@@ -36,27 +38,21 @@ function Create() {
         setTitleError(false);
         setDetailError(false);
 
-        if(!title){
+        if (!title) {
             setTitleError(true)
         }
 
-        if(!detail){
+        if (!detail) {
             setDetailError(true)
         }
 
-        if(title && detail){
-            async function submitData(){
-                await fetch('http://localhost:8000/notes', {
-                    method:'POST',
-                    headers:{
-                        "Content-type": "application/json"
-                    },
-                    body: JSON.stringify({title, detail, category})
-                })
-                history.push('/');
-            }
-            submitData();
+        if (title && detail) {
+            submitNote(title, detail, category);
         }
+    }
+
+    if (saveSucess) {
+        return <Redirect to="/" />
     }
 
     return (
@@ -123,4 +119,11 @@ function Create() {
     )
 }
 
-export default Create
+const mapStateToProps = (state) => {
+    return {
+        notes: state.notes,
+        saveSucess: state.saveSucess
+    }
+}
+
+export default connect(mapStateToProps, { submitNote })(Create);

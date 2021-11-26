@@ -1,27 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Container from '@material-ui/core/Container';
 import Masonry from 'react-masonry-css'
 import NoteCard from '../components/NoteCard';
+import { fetchNotes, deleteNote } from '../actions/notes';
+import { connect } from "react-redux";
 
-function Notes() {
-    const [notes, setNotes] = useState([]);
+function Notes({ notes, fetchNotes, deleteNote }) {
 
     useEffect(() => {
-        async function fetchData() {
-            const res = await fetch('http://localhost:8000/notes');
-            const data = await res.json();
-            setNotes(data)
-        }
-        fetchData();
+        fetchNotes();
     }, [])
 
-    const handleNoteDelete = async (id) => {
-        const res = await fetch(`http://localhost:8000/notes/${id}`, {
-            method: 'DELETE'
-        });
-
-        const updatedNotes = notes.filter(note => note.id !== id);
-        setNotes(updatedNotes);
+    const handleNoteDelete = (id) => {
+        deleteNote(id)
     }
 
     const breakpoints = {
@@ -47,4 +38,9 @@ function Notes() {
     )
 }
 
-export default Notes
+const mapStateToProps = (state) => {
+    return {
+        notes: state.notes
+    }
+}
+export default connect(mapStateToProps, { fetchNotes, deleteNote })(Notes)
