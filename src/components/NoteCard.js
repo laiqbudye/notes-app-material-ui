@@ -3,10 +3,10 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import { IconButton, makeStyles } from '@material-ui/core';
-import { DeleteOutlined } from '@material-ui/icons';
+import { makeStyles } from '@material-ui/core';
 import Avatar from '@material-ui/core/Avatar';
 import { blue, yellow, pink, green } from '@material-ui/core/colors';
+import TransitionsModal from './Modal';
 
 const useStyles = makeStyles({
     avatar: {
@@ -32,9 +32,7 @@ function NoteCard({ note, handleNoteDelete }) {
             <Card elevation={1}>
                 <CardHeader
                     action={
-                        <IconButton onClick={() => handleNoteDelete(note.id)}>
-                            <DeleteOutlined />
-                        </IconButton>
+                        <TransitionsModal onClick={() => handleNoteDelete(note.id)} />
                     }
                     avatar={
                         <Avatar className={classes.avatar}>
