@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "This is my application to track my daily tasks",
   "main": "server.js",
+  "engines": {
+    "npm": "6.12.0",
+    "node": "12.13.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
