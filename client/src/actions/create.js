@@ -3,22 +3,22 @@ import {
     SAVE_NOTE_FAIL
 } from './types';
 
-export const submitNote = (title, detail, category) => {
+export const submitNote = (title, details, category) => {
     return async function (dispatch) {
         try {
-            const res = await fetch('http://localhost:8000/notes', {
+            const res = await fetch('/api/notes/create', {
                 method: 'POST',
                 headers: {
                     "Content-type": "application/json"
                 },
-                body: JSON.stringify({ title, detail, category })
+                body: JSON.stringify({ title, details, category })
             });
 
             const data = await res.json();
 
             dispatch({
                 type: SAVE_NOTE_SUCCESS,
-                payload: data
+                payload: data.data
             })
         } catch (error) {
             dispatch({

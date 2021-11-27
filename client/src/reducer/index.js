@@ -48,7 +48,7 @@ const reducer = (state = initialState, action) => {
         case DELETE_NOTE_SUCCESS:
             return {
                 ...state,
-                notes: state.notes.filter(note => note.id !== action.payload),
+                notes: state.notes.filter(note => note._id !== action.payload),
                 hasError: false
             }
 

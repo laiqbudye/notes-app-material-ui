@@ -8,11 +8,12 @@ import {
 export const fetchNotes = () => {
     return async function (dispatch) {
         try {
-            const res = await fetch('http://localhost:8000/notes');
+            const res = await fetch('/api/notes');
             const data = await res.json();
+            
             dispatch({
                 type: GET_NOTES_SUCCESS,
-                payload: data
+                payload: data.data
             })
         } catch (error) {
             dispatch({
@@ -26,7 +27,7 @@ export const fetchNotes = () => {
 export const deleteNote = (id) => {
     return async function (dispatch) {
         try {
-            const res = await fetch(`http://localhost:8000/notes/${id}`, {
+            const res = await fetch(`/api/notes/${id}`, {
                 method: 'DELETE'
             });
 

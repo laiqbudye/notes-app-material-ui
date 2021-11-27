@@ -29,7 +29,7 @@ function Notes({ notes, fetchNotes, deleteNote }) {
                 columnClassName="my-masonry-grid_column"
             >
                 {notes && notes.map(note => (
-                    <div item key={note.id} xs={12} md={6} lg={4}>
+                    <div item key={note._id} xs={12} md={6} lg={4}>
                         <NoteCard note={note} handleNoteDelete={handleNoteDelete} />
                     </div>
                 ))}

@@ -32,11 +32,11 @@ function NoteCard({ note, handleNoteDelete }) {
             <Card elevation={1}>
                 <CardHeader
                     action={
-                        <TransitionsModal onClick={() => handleNoteDelete(note.id)} />
+                        <TransitionsModal onClick={() => handleNoteDelete(note._id)} />
                     }
                     avatar={
                         <Avatar className={classes.avatar}>
-                            {note.category[0].toUpperCase()}
+                            {note && note.category[0].toUpperCase()}
                         </Avatar>
                     }
                     title={note.title}
@@ -45,7 +45,7 @@ function NoteCard({ note, handleNoteDelete }) {
                 </CardHeader>
                 <CardContent>
                     <Typography color='textSecondary'>
-                        {note.detail}
+                        {note.details}
                     </Typography>
                 </CardContent>
             </Card>
