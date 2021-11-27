@@ -10,7 +10,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { useHistory, useLocation } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import AppBar from '@material-ui/core/AppBar';
-import ToolBar from '@material-ui/core/ToolBar';
+import Toolbar from '@material-ui/core/Toolbar';
 import DescriptionIcon from '@material-ui/icons/Description';
 
 const drawerWidth = 250;
@@ -73,7 +73,7 @@ function Layout({ children }) {
             <AppBar color='secondary' className={classes.appbar}
                 elevation={0}
             >
-                <ToolBar>
+                <Toolbar>
                     <Typography
                         variant='h5'
                         className={classes.description}
@@ -82,7 +82,7 @@ function Layout({ children }) {
                     </Typography>
                     <Typography>Laiq</Typography>
                     <Avatar className={classes.avatar} src='./laiq.jpg'></Avatar>
-                </ToolBar>
+                </Toolbar>
             </AppBar>
             {/* side drawer */}
             <Drawer className={classes.drawer}
