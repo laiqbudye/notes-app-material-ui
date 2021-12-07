@@ -1,6 +1,9 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 import AppBarWithSideBar from './AppBarWithSideBar';
+import ReactGA from 'react-ga';
+import { useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
 
 const useStyle = makeStyles((theme) => {
     return {
@@ -16,7 +19,15 @@ const useStyle = makeStyles((theme) => {
     }
 });
 
+ReactGA.initialize('UA-214532699-1');
+
 function Layout({ children }) {
+
+    useEffect(() => {
+        // sending current page to 
+        ReactGA.pageview(window.location.pathname + window.location.search);
+    })
+
     const classes = useStyle();
 
     return (
@@ -32,4 +43,4 @@ function Layout({ children }) {
     )
 }
 
-export default Layout
+export default withRouter(Layout)
